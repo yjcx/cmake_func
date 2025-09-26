@@ -1,8 +1,19 @@
 function(print_var VAR_NAME)
-  if(DEFINED ${VAR_NAME})
-    message(STATUS "${VAR_NAME} = ${${VAR_NAME}}")
+  if(NOT DEFINED ${VAR_NAME})
+    return(message (STATUS "${VAR_NAME} = <undefined>"))
+  endif()
+
+  set(value "${${VAR_NAME}}")
+  list(LENGTH value len)
+
+  if(len GREATER 1)
+    message(STATUS "${VAR_NAME} = [")
+    foreach(item IN LISTS value)
+      message(STATUS "    ${item}")
+    endforeach()
+    message(STATUS "]")
   else()
-    message(STATUS "${VAR_NAME} = <undefined>")
+    message(STATUS "${VAR_NAME} = ${value}")
   endif()
 endfunction()
 
