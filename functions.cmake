@@ -5,3 +5,11 @@ function(print_var VAR_NAME)
     message(STATUS "${VAR_NAME} = <undefined>")
   endif()
 endfunction()
+
+function(set_if_undefined VAR_NAME VAR_VALUE)
+  if(NOT DEFINED ${VAR_NAME})
+    set(${VAR_NAME}
+        ${VAR_VALUE}
+        PARENT_SCOPE)
+  endif()
+endfunction()
