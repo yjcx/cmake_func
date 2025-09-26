@@ -14,6 +14,14 @@ function(set_if_undefined VAR_NAME VAR_VALUE)
   endif()
 endfunction()
 
+function(delegate_call FUNCTION_NAME)
+  if(NOT COMMAND ${FUNCTION_NAME})
+    message(
+      FATAL_ERROR "Function '${FUNCTION_NAME}' is not defined or available")
+  endif()
+  cmake_language(CALL ${FUNCTION_NAME} ${ARGN})
+endfunction()
+
 function(get_subdirectories DIR_PATH RESULT_VAR)
   file(GLOB ENTRIES "${DIR_PATH}/*")
   set(SUBDIRS)
