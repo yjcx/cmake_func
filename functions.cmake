@@ -47,21 +47,23 @@ function(get_subdirectories DIR_PATH RESULT_VAR)
 endfunction()
 
 function(get_cpp_sources RESULT_VAR DIR_PATH)
-  if(NOT IS_DIRECTORY "${DIR_PATH}")
+  if(NOT IS_DIRECTORY ${DIR_PATH})
     message(FATAL_ERROR "Directory not found: ${DIR_PATH}")
   endif()
+  get_filename_component(abs_dir "${DIR_PATH}" ABSOLUTE BASE_DIR
+                         "${CMAKE_CURRENT_SOURCE_DIR}")
 
   file(
     GLOB_RECURSE
     sources
-    "${DIR_PATH}/*.cpp"
-    "${DIR_PATH}/*.cc"
-    "${DIR_PATH}/*.cxx"
-    "${DIR_PATH}/*.c++"
-    "${DIR_PATH}/*.h"
-    "${DIR_PATH}/*.hpp"
-    "${DIR_PATH}/*.hxx"
-    "${DIR_PATH}/*.h++")
+    "${abs_dir}/*.cpp"
+    "${abs_dir}/*.cc"
+    "${abs_dir}/*.cxx"
+    "${abs_dir}/*.c++"
+    "${abs_dir}/*.h"
+    "${abs_dir}/*.hpp"
+    "${abs_dir}/*.hxx"
+    "${abs_dir}/*.h++")
 
   set(${RESULT_VAR}
       ${sources}
