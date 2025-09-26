@@ -34,3 +34,25 @@ function(get_subdirectories DIR_PATH RESULT_VAR)
       ${SUBDIRS}
       PARENT_SCOPE)
 endfunction()
+
+function(get_cpp_sources RESULT_VAR DIR_PATH)
+  if(NOT IS_DIRECTORY "${DIR_PATH}")
+    message(FATAL_ERROR "Directory not found: ${DIR_PATH}")
+  endif()
+
+  file(
+    GLOB_RECURSE
+    sources
+    "${DIR_PATH}/*.cpp"
+    "${DIR_PATH}/*.cc"
+    "${DIR_PATH}/*.cxx"
+    "${DIR_PATH}/*.c++"
+    "${DIR_PATH}/*.h"
+    "${DIR_PATH}/*.hpp"
+    "${DIR_PATH}/*.hxx"
+    "${DIR_PATH}/*.h++")
+
+  set(${RESULT_VAR}
+      ${sources}
+      PARENT_SCOPE)
+endfunction()
