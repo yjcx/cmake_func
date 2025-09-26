@@ -13,3 +13,16 @@ function(set_if_undefined VAR_NAME VAR_VALUE)
         PARENT_SCOPE)
   endif()
 endfunction()
+
+function(get_subdirectories DIR_PATH RESULT_VAR)
+  file(GLOB ENTRIES "${DIR_PATH}/*")
+  set(SUBDIRS)
+  foreach(ENTRY ${ENTRIES})
+    if(IS_DIRECTORY ${ENTRY})
+      list(APPEND SUBDIRS ${ENTRY})
+    endif()
+  endforeach()
+  set(${RESULT_VAR}
+      ${SUBDIRS}
+      PARENT_SCOPE)
+endfunction()
