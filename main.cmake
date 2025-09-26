@@ -1,0 +1,3 @@
+include(./functions.cmake)
+
+hello()
