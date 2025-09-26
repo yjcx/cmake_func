@@ -1,3 +1,1 @@
 include(./functions.cmake)
-
-hello()
